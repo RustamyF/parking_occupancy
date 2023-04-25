@@ -12,13 +12,13 @@ class BoxDrawer:
         self.pos_list = self.positions()
         self.img = cv2.imread(self.image_path)
 
-        cv2.namedWindow('image')
-        cv2.setMouseCallback('image', self.draw_box)
+        cv2.namedWindow("image")
+        cv2.setMouseCallback("image", self.draw_box)
 
     @staticmethod
     def positions():
         try:
-            with open('park_positions', 'rb') as f:
+            with open("assets/park_positions", "rb") as f:
                 pos_list = pickle.load(f)
         except Exception as e:
             print(f"An error occurred: {e}, starting a new postion list")
@@ -34,7 +34,7 @@ class BoxDrawer:
             self.drawing = False
             self.end_point = (x, y)
             cv2.rectangle(self.img, self.start_point, self.end_point, (0, 255, 0), 2)
-            cv2.imshow('image', self.img)
+            cv2.imshow("image", self.img)
             self.pos_list.append((self.start_point, self.end_point))
 
         if event == cv2.EVENT_RBUTTONDOWN:
@@ -44,25 +44,27 @@ class BoxDrawer:
                     self.pos_list.pop(i)
                     self.img = cv2.imread(self.image_path)
 
-        with open('park_positions', 'wb') as f:
+        with open("assets/park_positions", "wb") as f:
             pickle.dump(self.pos_list, f)
 
     def start(self):
         while True:
 
-            cv2.imshow('image', self.img)
+            cv2.imshow("image", self.img)
             for pos in self.pos_list:
                 cv2.rectangle(self.img, pos[0], pos[1], (255, 0, 255), 1)
             key = cv2.waitKey(1) & 0xFF
-            if key == ord('q'):
+            if key == ord("q"):
                 break
 
         cv2.destroyAllWindows()
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument('-i', '--image', default='new_park.png', help='Path to the image')
+    parser.add_argument(
+        "-i", "--image", default="new_park.png", help="Path to the image"
+    )
     args = parser.parse_args()
     box_drawer = BoxDrawer(args.image)
     box_drawer.start()

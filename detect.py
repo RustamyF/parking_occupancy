@@ -27,7 +27,7 @@ class Detector:
         self.device = self.config.device
         self.start = time.time()
         self.count = 0
-        with open(pos_list_file, 'rb') as f:
+        with open(pos_list_file, "rb") as f:
             self.pos_list = pickle.load(f)
 
     def load_model(self):
@@ -50,8 +50,12 @@ class Detector:
         logging.info("************************* Done *****************************")
 
     def iou(self, boxA, boxB):
-        boxB = (min(boxB[0][0], boxB[1][0]), min(boxB[0][1], boxB[1][1]), max(boxB[0][0], boxB[1][0]),
-                max(boxB[0][1], boxB[1][1]))
+        boxB = (
+            min(boxB[0][0], boxB[1][0]),
+            min(boxB[0][1], boxB[1][1]),
+            max(boxB[0][0], boxB[1][0]),
+            max(boxB[0][1], boxB[1][1]),
+        )
         # box format: (x_min, y_min, x_max, y_max)
         x1 = max(boxA[0], boxB[0])
         y1 = max(boxA[1], boxB[1])
@@ -70,7 +74,7 @@ class Detector:
         outputs = model(img)
         # create a list of colors to use for each bounding box
         outputss = outputs[0].boxes
-        colors = ['green'] * len(outputss)
+        colors = ["green"] * len(outputss)
 
         for i, output in enumerate(outputss):
             # get the detection box coordinates
@@ -85,19 +89,26 @@ class Detector:
                 if iou > 0.4:
                     color = (0, 0, 255)
                     del self.pos_list[j]
-                    text = 'occupied'
-                    cv2.putText(img, text, (p1[0], p1[1] - 5), cv2.FONT_HERSHEY_COMPLEX_SMALL, 0.5,
-                                color, 1)
+                    text = "occupied"
+                    cv2.putText(
+                        img,
+                        text,
+                        (p1[0], p1[1] - 5),
+                        cv2.FONT_HERSHEY_COMPLEX_SMALL,
+                        0.5,
+                        color,
+                        1,
+                    )
                 else:
                     color = (0, 255, 0)
 
                 cv2.rectangle(img, p1, p2, color, 2)
 
-        cv2.imshow('image', img)
+        cv2.imshow("image", img)
         cv2.waitKey(0)
 
 
 if __name__ == "__main__":
-    pos_list_file = "park_positions"
+    pos_list_file = "assets/park_positions"
     detector = Detector(pos_list_file)
     detector.detect_and_check_iou()
