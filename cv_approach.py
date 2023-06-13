@@ -93,4 +93,4 @@ class ParkingLot:
 if __name__ == "__main__":
     pos_list_file = "assets/park_positions"
     parking_lot = ParkingLot(pos_list_file)
-    parking_lot.process_image("parking_lot.png")
+    parking_lot.process_image("assets/new_park.png")

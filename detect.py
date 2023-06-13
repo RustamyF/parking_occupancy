@@ -13,7 +13,7 @@ logging.basicConfig(
 
 @dataclass
 class Config:
-    source: str = "new_park.png"
+    source: str = "assets/new_park.png"
     view_img: bool = True
     device = torch.device("cuda") if torch.cuda.is_available() else torch.device("cpu")
     skip: int = 1
