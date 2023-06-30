@@ -19,7 +19,7 @@ Use the mouse to select the parking lot spots. The pixel coordinates of the park
 
 
 ### Approach 1: Using YOLOv8 Object Detection
-Another approach to detect parking lot occupancy is by leveraging deep learning and object detection techniques, specifically using the YOLOv8 model. YOLO (You Only Look Once) is a state-of-the-art object detection algorithm that can identify and localize objects in images. By training the YOLOv8 model on a labeled parking lot dataset, the model can learn to detect and classify different types of vehicles and other objects present in the parking lot. The trained model can then be used to analyze images and predict the occupancy status of parking spaces. This approach offers a more sophisticated and accurate solution, capable of detecting a wide range of objects beyond just vehicles.
+One approach to detect parking lot occupancy is by leveraging deep learning and object detection techniques, specifically using the YOLOv8 model. YOLO (You Only Look Once) is a state-of-the-art object detection algorithm that can identify and localize objects in images. By training the YOLOv8 model on a labeled parking lot dataset, the model can learn to detect and classify different types of vehicles and other objects present in the parking lot. The trained model can then be used to analyze images and predict the occupancy status of parking spaces. This approach offers a more sophisticated and accurate solution, capable of detecting a wide range of objects beyond just vehicles.
 
 ```python
 python detect.py
@@ -28,7 +28,7 @@ python detect.py
 <img src="assets/detect_result.png" alt="Alt Text" width="500" height="300">
 
 ### Approach 2: Using OpenCV and Color Shades
-One approach to detect parking lot occupancy is by utilizing OpenCV, a popular computer vision library, along with color shade analysis. This method involves segmenting the image based on predefined color thresholds for empty and occupied parking spaces. By setting appropriate color ranges and using image processing techniques like thresholding and contour detection, the algorithm can identify the occupied and vacant spaces in the parking lot. This approach offers a relatively simple and efficient solution for parking lot occupancy detection, especially when the color shades of the empty and occupied spaces have distinct differences.
+Another approach to detect parking lot occupancy is by utilizing OpenCV, a popular computer vision library, along with color shade analysis. This method involves segmenting the image based on predefined color thresholds for empty and occupied parking spaces. By setting appropriate color ranges and using image processing techniques like thresholding and contour detection, the algorithm can identify the occupied and vacant spaces in the parking lot. This approach offers a relatively simple and efficient solution for parking lot occupancy detection, especially when the color shades of the empty and occupied spaces have distinct differences.
 
 ```python
 python cv_approach.py
